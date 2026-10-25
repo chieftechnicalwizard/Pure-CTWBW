@@ -6,7 +6,7 @@
   <a href="https://huggingface.co/cyun9286/PURE"><img src="https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Official%20Weights-blue" alt="Hugging Face Weights"></a> &nbsp;
   <a href="https://huggingface.co/spaces/cyun9286/PURE-Studio"><img src="https://img.shields.io/badge/%F0%9F%A4%97%20Studio-Try%20the%20Demo-orange" alt="Open PURE Studio"></a> &nbsp;
   <a href="docs/BLACKWELL_OPTIMIZATIONS.md"><img src="https://img.shields.io/badge/NVIDIA%20Blackwell-RTX%205070%20Ti%20%7C%20DGX%20Spark%20GB10-76b900" alt="Blackwell Optimizations"></a> &nbsp;
-  <a href="https://www.paypal.com/donate/?business=DQWR2UNVNWPQU&no_recurring=0&item_name=SHEKINAH+SHINE+MAINTENANCE%2C+GARDEN%2C+AND+GROUNDSKEEPING&currency_code=USD"><img src="docs/badges/paypal-donate-pill.svg" alt="Donate via PayPal" height="20"></a>
+  <a href="https://www.shekinahshine.org/?donate=paypal"><img src="docs/badges/paypal-donate-pill.svg" alt="Donate via PayPal" height="20"></a>
 </p>
 
 > **Pure-CTWBW** (*ChiefTechnicalWizard Blackwell Edition*) is an optimized fork of [**IGL-HKUST/PURE**](https://github.com/IGL-HKUST/PURE) (*ACM Multimedia 2026*) engineered for **NVIDIA Blackwell** hardware across three flexible deployment options:
@@ -219,10 +219,10 @@ PURE builds on [VGGT](https://github.com/facebookresearch/vggt), [Pi3](https://g
 Sponsorship and donations support Shekinah Shine maintenance, sanctuary groundskeeping, AI broadcast infrastructure, and open-source development.
 
 <p>
-  <a href="https://www.paypal.com/donate/?business=DQWR2UNVNWPQU&no_recurring=0&item_name=SHEKINAH+SHINE+MAINTENANCE%2C+GARDEN%2C+AND+GROUNDSKEEPING&currency_code=USD"><img src="docs/badges/paypal-donate-pill.svg" alt="Donate via PayPal" height="24" align="absmiddle" /></a> &nbsp;·&nbsp;
-  <a href="https://www.paypal.com/donate/?business=DQWR2UNVNWPQU&no_recurring=0&item_name=SHEKINAH+SHINE+MAINTENANCE%2C+GARDEN%2C+AND+GROUNDSKEEPING&currency_code=USD"><img src="docs/badges/icon-paypal.svg" width="16" height="16" align="absmiddle" alt="" /> PayPal Donate (Shekinah Shine)</a> &nbsp;·&nbsp;
-  <a href="https://cash.app/$chieftechnicalwizard"><img src="docs/badges/icon-cashapp.svg" width="16" height="16" align="absmiddle" alt="" /> Cash App</a> &nbsp;·&nbsp;
-  <a href="https://venmo.com/u/Christopher-CTW"><img src="docs/badges/icon-venmo.svg" width="16" height="16" align="absmiddle" alt="" /> Venmo</a> &nbsp;·&nbsp;
+  <a href="https://www.shekinahshine.org/?donate=paypal"><img src="docs/badges/paypal-donate-pill.svg" alt="Donate via PayPal" height="24" align="absmiddle" /></a> &nbsp;·&nbsp;
+  <a href="https://www.shekinahshine.org/?donate=paypal"><img src="docs/badges/icon-paypal.svg" width="16" height="16" align="absmiddle" alt="" /> PayPal Donate (Shekinah Shine)</a> &nbsp;·&nbsp;
+  <a href="https://www.shekinahshine.org/?donate=cashapp"><img src="docs/badges/icon-cashapp.svg" width="16" height="16" align="absmiddle" alt="" /> Cash App</a> &nbsp;·&nbsp;
+  <a href="https://www.shekinahshine.org/?donate=venmo"><img src="docs/badges/icon-venmo.svg" width="16" height="16" align="absmiddle" alt="" /> Venmo</a> &nbsp;·&nbsp;
   <a href="https://github.com/sponsors/chieftechnicalwizard"><img src="docs/badges/icon-github-sponsors.svg" width="16" height="16" align="absmiddle" alt="" /> GitHub Sponsors</a> &nbsp;·&nbsp;
   <a href="https://www.shekinahshine.org/"><img src="docs/badges/icon-shekinah.svg" width="16" height="16" align="absmiddle" alt="" /> Shekinah Shine Website</a>
 </p>
