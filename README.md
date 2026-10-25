@@ -5,14 +5,15 @@
   <a href="https://funnyguy525.github.io/PURE-Page/"><img src="https://img.shields.io/badge/Project-Page-Green" alt="Project Page"></a> &nbsp;
   <a href="https://huggingface.co/cyun9286/PURE"><img src="https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Official%20Weights-blue" alt="Hugging Face Weights"></a> &nbsp;
   <a href="https://huggingface.co/spaces/cyun9286/PURE-Studio"><img src="https://img.shields.io/badge/%F0%9F%A4%97%20Studio-Try%20the%20Demo-orange" alt="Open PURE Studio"></a> &nbsp;
-  <a href="docs/BLACKWELL_OPTIMIZATIONS.md"><img src="https://img.shields.io/badge/NVIDIA%20Blackwell-RTX%205070%20Ti%20%7C%20DGX%20Spark%20GB10-76b900" alt="Blackwell Optimizations"></a>
+  <a href="docs/BLACKWELL_OPTIMIZATIONS.md"><img src="https://img.shields.io/badge/NVIDIA%20Blackwell-RTX%205070%20Ti%20%7C%20DGX%20Spark%20GB10-76b900" alt="Blackwell Optimizations"></a> &nbsp;
+  <a href="https://www.paypal.com/donate/?business=DQWR2UNVNWPQU&no_recurring=0&item_name=SHEKINAH+SHINE+MAINTENANCE%2C+GARDEN%2C+AND+GROUNDSKEEPING&currency_code=USD"><img src="docs/badges/paypal-donate-pill.svg" alt="Donate via PayPal" height="20"></a>
 </p>
 
-> **Pure-CTWBW** (*ChiefTechnicalWizard Blackwell Edition*) is an optimized fork of [**IGL-HKUST/PURE**](https://github.com/IGL-HKUST/PURE) (*ACM Multimedia 2026*) engineered for **100% standalone, single-GPU execution** on **NVIDIA Blackwell** hardware.
+> **Pure-CTWBW** (*ChiefTechnicalWizard Blackwell Edition*) is an optimized fork of [**IGL-HKUST/PURE**](https://github.com/IGL-HKUST/PURE) (*ACM Multimedia 2026*) engineered for **NVIDIA Blackwell** hardware across three flexible deployment options:
 >
-> Choose **either** standalone deployment target independently:
-> - **Standalone Option A — Desktop Blackwell (`GeForce RTX 5070 Ti 16 GB GDDR7`, `x86_64`)**: Runs the complete 48-frame Studio web app, CLI, and all three backbones (`pi3`, `da3`, `vggt`) + `SegFormer-B2` sky removal on a single 16 GB desktop GPU (`5.26–6.87 GiB` peak VRAM—eliminating the upstream 24 GB A10G requirement).
-> - **Standalone Option B — Grace Blackwell (`NVIDIA DGX Spark GB10 128 GB Unified`, `ARM64`)**: Runs the complete 48-frame Studio web app, CLI, and ultra-long `96–250+` frame single-pass sequences on a single ARM64 Grace Blackwell superchip.
+> - **Option A (Standalone Desktop GPU) — `GeForce RTX 5070 Ti 16 GB GDDR7` (`x86_64`)**: Runs the complete 48-frame Studio web app, CLI, and all three backbones (`pi3`, `da3`, `vggt`) + `SegFormer-B2` sky removal 100% standalone on a single 16 GB desktop GPU (`5.26–6.87 GiB` peak VRAM—eliminating the upstream 24 GB A10G requirement).
+> - **Option B (Standalone Grace Blackwell Superchip) — `NVIDIA DGX Spark GB10 128 GB Unified` (`ARM64`)**: Runs the complete 48-frame Studio web app, CLI, and ultra-long `96–250+` frame single-pass sequences 100% standalone on a single ARM64 Grace Blackwell node.
+> - **Option C (Dual-Node Heterogeneous Cluster) — `Tier 1 DGX Spark GB10 (128 GB) + Tier 2 RTX 5070 Ti (16 GB)`**: Combines both nodes (`144 GB` combined memory pool) to isolate always-on 24/7 Studio serving & `96–250+` frame ultra-long jobs on Tier 1 while offloading parallel `2–96` frame CLI batches & multi-model ensembles to Tier 2.
 >
 > *No model weights are mirrored in this repository; all weights are downloaded directly from the official upstream Hugging Face repositories ([`cyun9286/PURE`](https://huggingface.co/cyun9286/PURE), [`FunnyGuy525/RefinedModel`](https://huggingface.co/FunnyGuy525/RefinedModel), and [`nvidia/segformer-b2-finetuned-ade-512-512`](https://huggingface.co/nvidia/segformer-b2-finetuned-ade-512-512)).*
 
@@ -52,24 +53,34 @@
 
 ---
 
-## 🖥️ Standalone Deployment Options & Hardware Comparison
+## 🖥️ Deployment Options: Standalone Single-GPU (Options A & B) & Dual-Node Cluster (Option C)
 
-Each deployment option below is **100% self-contained on a single machine with a single GPU**—no multi-node cluster is required.
+`Pure-CTWBW` runs **100% standalone on a single GPU** (Option A or Option B), or can be deployed across **both nodes simultaneously** as a **Dual-Node Heterogeneous Blackwell Cluster** (Option C).
+
+### 1. Standalone Deployment Comparison (`Option A: RTX 5070 Ti 16 GB` vs. `Option B: DGX Spark GB10 128 GB`)
 
 <p align="center">
   <img src="assets/blackwell_standalone_comparison.png" alt="Standalone Deployment Comparison: GeForce RTX 5070 Ti 16 GB vs. DGX Spark GB10 128 GB" width="100%">
 </p>
 
-| Feature / Metric | **Standalone Option A: GeForce RTX 5070 Ti (`16 GB`)** | **Standalone Option B: NVIDIA DGX Spark `GB10` (`128 GB`)** | Upstream Reference Baseline (`A10G 24 GB`) |
-| :--- | :--- | :--- | :--- |
-| **System Architecture** | Single Desktop / Workstation GPU (`x86_64`) | Single Grace Blackwell Superchip (`ARM64 aarch64`) | Cloud / Datacenter GPU (`x86_64`) |
-| **Memory Pool & Bandwidth** | **`16 GB GDDR7`** (`~672 GB/s`) | **`128 GB Unified LPDDR5x`** (`~273 GB/s`) | `24 GB GDDR6` (`~600 GB/s`) |
-| **48-Frame Peak Memory Used (`da3` / `pi3` / `vggt`)** | **`6.34 GiB` / `6.87 GiB` / `5.26 GiB`** (`33%–43%` of 16 GB) | **`6.34 GiB` / `6.87 GiB` / `5.26 GiB`** (`4%–5%` of 128 GB) | `10.13 GiB` / `8.52 GiB` / `6.94 GiB` (`FP32` master weights) |
-| **Studio Web UI (`2–48` Frames, All 3 Models)** | **100% Supported Standalone** (even in shared mode with `~12–13 GiB` free VRAM) | **100% Supported Standalone** | Supported |
-| **Max Consecutive Frame Ceiling (CLI)** | **`48–64` frames (Shared)** · **`64–96+` frames (Dedicated 16 GB)** | **`96–250+` frames** (Single-pass ultra-long sequences) | `~64–80` frames |
-| **Best Fit Use Case** | Fast interactive desktop/workstation 3D reconstruction (`2–96` frames) on consumer 16 GB Blackwell hardware | Always-on 24/7 Studio appliance, ultra-long `96–250+` frame CLI sequences, or co-hosting multiple large AI models simultaneously | Standard cloud Space deployment |
+### 2. Multi-Node Cluster Topology (`Option C: Tier 1 DGX Spark GB10 + Tier 2 GeForce RTX 5070 Ti`)
 
-See the full architectural deep dive and standalone setup instructions for both platforms in [**`docs/BLACKWELL_OPTIMIZATIONS.md`**](docs/BLACKWELL_OPTIMIZATIONS.md).
+<p align="center">
+  <img src="assets/blackwell_multinode_cluster.png" alt="Option C: Dual-Node Blackwell Cluster (Tier 1 GB10 + Tier 2 RTX 5070 Ti)" width="100%">
+</p>
+
+### 3. Complete Deployment Matrix (`Options A, B, and C` vs. `Upstream Baseline`)
+
+| Feature / Metric | **Option A (Standalone): GeForce RTX 5070 Ti (`16 GB`)** | **Option B (Standalone): NVIDIA DGX Spark `GB10` (`128 GB`)** | **Option C (Dual-Node Cluster): Tier 1 `GB10` + Tier 2 `RTX 5070 Ti`** | Upstream Reference Baseline (`A10G 24 GB`) |
+| :--- | :--- | :--- | :--- | :--- |
+| **System Architecture** | Single Desktop / Workstation GPU (`x86_64`) | Single Grace Blackwell Superchip (`ARM64 aarch64`) | Heterogeneous 2-Node Blackwell Cluster (`ARM64` + `x86_64`) | Single Cloud / Datacenter GPU (`x86_64`) |
+| **Memory Pool & Bandwidth** | **`16 GB GDDR7`** (`~672 GB/s`) | **`128 GB Unified LPDDR5x`** (`~273 GB/s`) | **`144 GB Combined Pool`** (`128 GB Unified` + `16 GB GDDR7`) | `24 GB GDDR6` (`~600 GB/s`) |
+| **48-Frame Peak Memory Used (`da3` / `pi3` / `vggt`)** | **`6.34` / `6.87` / `5.26 GiB`** (`33%–43%` of 16 GB) | **`6.34` / `6.87` / `5.26 GiB`** (`4%–5%` of 128 GB) | **`5.26–6.87 GiB` per active node** (Bit-for-bit identical outputs across both nodes) | `10.13` / `8.52` / `6.94 GiB` (`FP32` master weights) |
+| **Studio Web UI (`2–48` Frames, All 3 Models)** | **100% Supported Standalone** (Shared or Dedicated) | **100% Supported Standalone** (Always-On) | **Always-On on Tier 1 (`GB10`)** + Zero-Contention CLI Batch Worker on Tier 2 (`5070 Ti`) | Supported |
+| **Max Consecutive Frame Ceiling (CLI)** | **`48–64` frames (Shared)** · **`64–96+` frames (Dedicated 16 GB)** | **`96–250+` frames** (Single-pass ultra-long sequences) | **`64–96+` frames on Tier 2** + **`96–250+` frames on Tier 1** in parallel | `~64–80` frames |
+| **Best Fit Use Case** | Fast interactive desktop/workstation 3D reconstruction (`2–96` frames) on consumer 16 GB hardware | Always-on 24/7 Studio appliance, ultra-long `96–250+` frame CLI sequences, or co-hosting multiple large AI models | High-throughput parallel multi-backbone ensembles (`pi3` + `da3` + `vggt` simultaneously), Studio/CLI isolation, and LAN-synced air-gapped operation | Standard cloud Space deployment |
+
+See the full architectural deep dive and setup instructions for all three deployment options in [**`docs/BLACKWELL_OPTIMIZATIONS.md`**](docs/BLACKWELL_OPTIMIZATIONS.md).
 
 ---
 
@@ -202,12 +213,15 @@ PURE builds on [VGGT](https://github.com/facebookresearch/vggt), [Pi3](https://g
 
 ---
 
-## 💖 Sponsors & Support
+## Sponsors & Donations
 
-Sponsorship and donations support Shekinah Shine maintenance, sanctuary groundskeeping, hardware R&D, and open-source development:
+Sponsorship and donations support Shekinah Shine maintenance, sanctuary groundskeeping, AI broadcast infrastructure, and open-source development.
 
-* **PayPal Donate (Shekinah Shine):** [Donate via PayPal](https://www.paypal.com/donate/?business=DQWR2UNVNWPQU&no_recurring=0&item_name=SHEKINAH+SHINE+MAINTENANCE%2C+GARDEN%2C+AND+GROUNDSKEEPING&currency_code=USD)
-* **Cash App:** [`$chieftechnicalwizard`](https://cash.app/$chieftechnicalwizard)
-* **Venmo:** [`@Christopher-CTW`](https://venmo.com/u/Christopher-CTW)
-* **GitHub Sponsors:** [github.com/sponsors/chieftechnicalwizard](https://github.com/sponsors/chieftechnicalwizard)
-* **Website:** [shekinahshine.org](https://www.shekinahshine.org/)
+<p>
+  <a href="https://www.paypal.com/donate/?business=DQWR2UNVNWPQU&no_recurring=0&item_name=SHEKINAH+SHINE+MAINTENANCE%2C+GARDEN%2C+AND+GROUNDSKEEPING&currency_code=USD"><img src="docs/badges/paypal-donate-pill.svg" alt="Donate via PayPal" height="24" align="absmiddle" /></a> &nbsp;·&nbsp;
+  <a href="https://www.paypal.com/donate/?business=DQWR2UNVNWPQU&no_recurring=0&item_name=SHEKINAH+SHINE+MAINTENANCE%2C+GARDEN%2C+AND+GROUNDSKEEPING&currency_code=USD"><img src="docs/badges/icon-paypal.svg" width="16" height="16" align="absmiddle" alt="" /> PayPal Donate (Shekinah Shine)</a> &nbsp;·&nbsp;
+  <a href="https://cash.app/$chieftechnicalwizard"><img src="docs/badges/icon-cashapp.svg" width="16" height="16" align="absmiddle" alt="" /> Cash App</a> &nbsp;·&nbsp;
+  <a href="https://venmo.com/u/Christopher-CTW"><img src="docs/badges/icon-venmo.svg" width="16" height="16" align="absmiddle" alt="" /> Venmo</a> &nbsp;·&nbsp;
+  <a href="https://github.com/sponsors/chieftechnicalwizard"><img src="docs/badges/icon-github-sponsors.svg" width="16" height="16" align="absmiddle" alt="" /> GitHub Sponsors</a> &nbsp;·&nbsp;
+  <a href="https://www.shekinahshine.org/"><img src="docs/badges/icon-shekinah.svg" width="16" height="16" align="absmiddle" alt="" /> Shekinah Shine Website</a>
+</p>

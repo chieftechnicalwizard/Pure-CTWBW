@@ -90,16 +90,32 @@
   bash scripts/hub/stage_offline_weights.sh ./offline_weights
   ```
 
-### Direct Comparison Table (`Option A` vs. `Option B` vs. `Upstream Baseline`)
+### Option C (Multi-Node Cluster): Tier 1 (`DGX Spark GB10 128 GB`) + Tier 2 (`GeForce RTX 5070 Ti 16 GB`)
 
-| Dimension | **Option A: GeForce RTX 5070 Ti (`16 GB`)** | **Option B: DGX Spark `GB10` (`128 GB`)** | Upstream Reference (`A10G 24 GB`) |
-| :--- | :--- | :--- | :--- |
-| **Deployment Type** | **100% Standalone Single GPU (`x86_64`)** | **100% Standalone Single Superchip (`ARM64`)** | Single Cloud GPU (`x86_64`) |
-| **Total GPU Memory** | `16 GB GDDR7` (`672 GB/s`) | `128 GB Unified LPDDR5x` (`273 GB/s`) | `24 GB GDDR6` (`600 GB/s`) |
-| **48-Frame Studio Peak (`da3-Giant`)** | **`6.34 GiB` (`39.6%` of 16 GB)** | **`6.34 GiB` (`5.0%` of 128 GB)** | `10.13 GiB` (`42.2%` of 24 GB) |
-| **48-Frame Studio Support (All 3 Models)** | **Yes (Shared or Dedicated)** | **Yes (Always-On)** | Yes |
-| **Max CLI Frame Count (Single Pass)** | **`48–64` (Shared) / `64–96+` (Dedicated)** | **`96–250+` Frames** | `~64–80` Frames |
-| **Primary Strength** | High GDDR7 bandwidth & desktop SM clocks on affordable 16 GB hardware | Massive 128 GB unified memory for 250+ frame sequences & 24/7 multi-service hosting | Standard cloud baseline |
+When both machines are available on the same LAN or Tailscale mesh, they can be combined into a **144 GB Heterogeneous Blackwell Cluster**:
+
+<p align="center">
+  <img src="../assets/blackwell_multinode_cluster.png" alt="Option C: Dual-Node Blackwell Cluster (Tier 1 GB10 + Tier 2 RTX 5070 Ti)" width="100%">
+</p>
+
+1. **Interactive Studio + Automated CLI Batch Isolation:**
+   - **Tier 1 (`DGX Spark GB10 128 GB`)** serves the persistent 24/7 **PURE Reconstruction Studio** web interface (`app.py`) alongside other resident production models (`TTS`, `ASR`, `DiT`), and handles ultra-long `96–250+` frame CLI reconstructions that exceed 16 GB discrete VRAM.
+   - **Tier 2 (`GeForce RTX 5070 Ti 16 GB`)** executes automated `2–96` frame CLI batch reconstructions (`scripts/demo/reconstruct.py`) at high GDDR7 memory bandwidth (`672 GB/s`), preventing batch jobs from queuing behind interactive Studio users.
+2. **Parallel Multi-Backbone Ensemble & Dataset Sharding:**
+   - Because `_apply_blackwell_split_bf16()` produces **bit-for-bit identical outputs (`max_abs_diff = 0.0`)** across `ARM64 GB10` and `x86_64 RTX 5070 Ti`, multi-backbone comparison runs (`pi3`, `da3`, `vggt`) and multi-video dataset jobs can be sharded across Tier 1 and Tier 2 in parallel, cutting total wall-clock execution time in half.
+3. **Single-Download LAN Weight Synchronization:**
+   - Run `bash scripts/hub/stage_offline_weights.sh ./offline_weights` once on either node to download and SHA256-verify the `13.3 GB` weight bundle from Hugging Face, then `rsync -avP ./offline_weights/ <peer_node>:~/PURE-offline/offline_weights/` across the local LAN at `100+ MB/s` with zero external bandwidth overhead.
+
+### Direct Comparison Table (`Options A, B, and C` vs. `Upstream Baseline`)
+
+| Dimension | **Option A (Standalone): GeForce RTX 5070 Ti (`16 GB`)** | **Option B (Standalone): DGX Spark `GB10` (`128 GB`)** | **Option C (Dual-Node Cluster): Tier 1 `GB10` + Tier 2 `5070 Ti`** | Upstream Reference (`A10G 24 GB`) |
+| :--- | :--- | :--- | :--- | :--- |
+| **Deployment Type** | **100% Standalone Single GPU (`x86_64`)** | **100% Standalone Single Superchip (`ARM64`)** | **Heterogeneous 2-Node Cluster (`ARM64` + `x86_64`)** | Single Cloud GPU (`x86_64`) |
+| **Total GPU Memory** | `16 GB GDDR7` (`672 GB/s`) | `128 GB Unified LPDDR5x` (`273 GB/s`) | `144 GB Combined` (`128 GB Unified` + `16 GB GDDR7`) | `24 GB GDDR6` (`600 GB/s`) |
+| **48-Frame Studio Peak (`da3-Giant`)** | **`6.34 GiB` (`39.6%` of 16 GB)** | **`6.34 GiB` (`5.0%` of 128 GB)** | **`6.34 GiB` on active node** | `10.13 GiB` (`42.2%` of 24 GB) |
+| **48-Frame Studio Support (All 3 Models)** | **Yes (Shared or Dedicated)** | **Yes (Always-On)** | **Yes (Isolated Studio on Tier 1 + CLI Worker on Tier 2)** | Yes |
+| **Max CLI Frame Count (Single Pass)** | **`48–64` (Shared) / `64–96+` (Dedicated)** | **`96–250+` Frames** | **`64–96+` (Tier 2) + `96–250+` (Tier 1) in Parallel** | `~64–80` Frames |
+| **Primary Strength** | High GDDR7 bandwidth & desktop SM clocks on affordable 16 GB hardware | Massive 128 GB unified memory for 250+ frame sequences & 24/7 multi-service hosting | Zero Studio/CLI contention, 2× parallel multi-model throughput, & single-download LAN weight sync | Standard cloud baseline |
 
 ---
 
