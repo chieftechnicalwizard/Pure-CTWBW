@@ -5,23 +5,27 @@
   <a href="https://funnyguy525.github.io/PURE-Page/"><img src="https://img.shields.io/badge/Project-Page-Green" alt="Project Page"></a> &nbsp;
   <a href="https://huggingface.co/cyun9286/PURE"><img src="https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Official%20Weights-blue" alt="Hugging Face Weights"></a> &nbsp;
   <a href="https://huggingface.co/spaces/cyun9286/PURE-Studio"><img src="https://img.shields.io/badge/%F0%9F%A4%97%20Studio-Try%20the%20Demo-orange" alt="Open PURE Studio"></a> &nbsp;
-  <a href="docs/BLACKWELL_OPTIMIZATIONS.md"><img src="https://img.shields.io/badge/NVIDIA%20Blackwell-RTX%205070%20Ti%20%26%20DGX%20Spark%20GB10-76b900" alt="Blackwell Optimizations"></a>
+  <a href="docs/BLACKWELL_OPTIMIZATIONS.md"><img src="https://img.shields.io/badge/NVIDIA%20Blackwell-RTX%205070%20Ti%20%7C%20DGX%20Spark%20GB10-76b900" alt="Blackwell Optimizations"></a>
 </p>
 
-> **Pure-CTWBW** (*ChiefTechnicalWizard Blackwell Edition*) is an optimized fork of [**IGL-HKUST/PURE**](https://github.com/IGL-HKUST/PURE) (*ACM Multimedia 2026*) engineered for **NVIDIA Blackwell** architectures—specifically **GeForce RTX 5070 Ti (`16 GB GDDR7`, `x86_64`)** and **NVIDIA DGX Spark Grace Blackwell `GB10` (`128 GB Unified Memory`, `ARM64`)**—with **Split-Precision `bfloat16`/`float32` Weight Residency**, **FlashAttention-2 SDPA $O(N)$ scaling**, **inter-stage CUDA virtual page reclamation**, and **100% air-gapped offline execution**.
+> **Pure-CTWBW** (*ChiefTechnicalWizard Blackwell Edition*) is an optimized fork of [**IGL-HKUST/PURE**](https://github.com/IGL-HKUST/PURE) (*ACM Multimedia 2026*) engineered for **100% standalone, single-GPU execution** on **NVIDIA Blackwell** hardware.
+>
+> Choose **either** standalone deployment target independently:
+> - **Standalone Option A — Desktop Blackwell (`GeForce RTX 5070 Ti 16 GB GDDR7`, `x86_64`)**: Runs the complete 48-frame Studio web app, CLI, and all three backbones (`pi3`, `da3`, `vggt`) + `SegFormer-B2` sky removal on a single 16 GB desktop GPU (`5.26–6.87 GiB` peak VRAM—eliminating the upstream 24 GB A10G requirement).
+> - **Standalone Option B — Grace Blackwell (`NVIDIA DGX Spark GB10 128 GB Unified`, `ARM64`)**: Runs the complete 48-frame Studio web app, CLI, and ultra-long `96–250+` frame single-pass sequences on a single ARM64 Grace Blackwell superchip.
 >
 > *No model weights are mirrored in this repository; all weights are downloaded directly from the official upstream Hugging Face repositories ([`cyun9286/PURE`](https://huggingface.co/cyun9286/PURE), [`FunnyGuy525/RefinedModel`](https://huggingface.co/FunnyGuy525/RefinedModel), and [`nvidia/segformer-b2-finetuned-ade-512-512`](https://huggingface.co/nvidia/segformer-b2-finetuned-ade-512-512)).*
 
 ---
 
-## ⚡ NVIDIA Blackwell Optimizations (`RTX 5070 Ti 16 GB` & `DGX Spark GB10 128 GB`)
+## ⚡ NVIDIA Blackwell Optimizations & Benchmarks
 
 <p align="center">
   <img src="assets/blackwell_vram_benchmark.png" alt="Pure-CTWBW Blackwell 48-Frame VRAM and Latency Benchmark" width="100%">
 </p>
 
 <p align="center">
-  <img src="assets/blackwell_architecture_pipeline.png" alt="Pure-CTWBW Split-Precision Blackwell Architecture and Dual-Node Deployment" width="100%">
+  <img src="assets/blackwell_architecture_pipeline.png" alt="Pure-CTWBW Split-Precision Blackwell Pipeline and Standalone GPU Options" width="100%">
 </p>
 
 ### Key Enhancements Over Upstream (`0.0` Max Numerical Difference)
@@ -30,9 +34,9 @@
    - Upstream PURE loads all `989M–1.21B` parameters in `float32` (`3.45–4.58 GiB`) and dynamically casts backbone weights to `bfloat16` inside `torch.autocast`, holding both `float32` master weights and temporary `bfloat16` cast buffers in VRAM simultaneously.
    - Because all three adapters (`pi3`, `da3`, `vggt`) wrap their final camera-pose and depth-refiner heads (`DualDPT`, `CameraDec`, `DepthRefiner`, `CameraHead`, `DPTHead`) in `with torch.autocast(enabled=False):` using `.float()` tensors for sub-millimeter $SE(3)$ pose accuracy, `_apply_blackwell_split_bf16()` pre-casts `nn.Linear`/`nn.Conv2d`/`nn.ConvTranspose2d` layers **only inside the BF16-autocast vision & alternating-attention backbones** while keeping `nn.LayerNorm` and all `autocast(enabled=False)` pose/depth heads in exact `float32`.
    - **Result:** Cuts static weight VRAM by **39%–48%**, slashes 48-frame peak GPU VRAM by **19.4%–37.4%** (saving **`-3.79 GiB`** on `da3-Giant`), and achieves **`max_abs_diff = 0.000000e+00` (bit-for-bit identical outputs)** against upstream!
-2. **Full 48-Frame Studio & `64–96+` Frame CLI on `16 GB` GeForce RTX 5070 Ti:**
-   - Upstream documentation recommends a **24 GB GPU (A10G)** for 48-frame reconstructions.
-   - With Split-Precision weight residency + Blackwell FlashAttention-2 SDPA (`O(N)` memory scaling) + inter-stage `torch.cuda.empty_cache()` before `SegFormer-B2` sky segmentation, **48-frame peak VRAM drops to just `5.26 GiB` (`vggt`), `6.34 GiB` (`da3`), and `6.87 GiB` (`pi3`)**—fitting effortlessly on a **16 GB GeForce RTX 5070 Ti** even when sharing the GPU with other services, and unlocking **`64–96+` frame CLI reconstructions** when dedicated!
+2. **Blackwell FlashAttention-2 SDPA (`O(N)` Multi-View Scaling) & Inter-Stage Page Reclamation:**
+   - Enforces fused FlashAttention-2 / cuDNN SDPA kernels (`torch.backends.cuda.enable_flash_sdp(True)`) so multi-view attention scales linearly ($O(N)$) with frame count (going from 16 to 48 frames adds only `~1.0 GiB` of activation memory).
+   - Automatically enables `PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True` and runs `torch.cuda.empty_cache()` between the 3D backbone forward pass and the `SegFormer-B2` sky segmentation pass so their peak VRAM allocations never stack.
 3. **Inference Checkpoint Bypass (`pure/models/pi3/layers/transformer_head.py`):**
    - Skips unconditional `torch.utils.checkpoint.checkpoint` calls in `pi3` upsample blocks during `torch.inference_mode()`, reducing 48-frame latency by **6.8%–8.3%**.
 4. **100% Air-Gapped / Offline Execution (`scripts/hub/stage_offline_weights.sh`):**
@@ -46,7 +50,26 @@
 | **`da3`** | `1.21B` | `4.58 GiB` | **`2.42 GiB` (-47%)** | `10.13 GiB` | **`6.34 GiB`** | **`-3.79 GiB` (-37.4%)** | `6.48 s` | **`5.94 s` (-8.3%)** | `0.000000e+00` |
 | **`pi3`** | `989M` | `3.45 GiB` | **`1.79 GiB` (-48%)** | `8.52 GiB` | **`6.87 GiB`** | **`-1.65 GiB` (-19.4%)** | `8.81 s` | **`8.21 s` (-6.8%)** | `0.000000e+00` |
 
-See the full architectural deep dive in [**`docs/BLACKWELL_OPTIMIZATIONS.md`**](docs/BLACKWELL_OPTIMIZATIONS.md).
+---
+
+## 🖥️ Standalone Deployment Options & Hardware Comparison
+
+Each deployment option below is **100% self-contained on a single machine with a single GPU**—no multi-node cluster is required.
+
+<p align="center">
+  <img src="assets/blackwell_standalone_comparison.png" alt="Standalone Deployment Comparison: GeForce RTX 5070 Ti 16 GB vs. DGX Spark GB10 128 GB" width="100%">
+</p>
+
+| Feature / Metric | **Standalone Option A: GeForce RTX 5070 Ti (`16 GB`)** | **Standalone Option B: NVIDIA DGX Spark `GB10` (`128 GB`)** | Upstream Reference Baseline (`A10G 24 GB`) |
+| :--- | :--- | :--- | :--- |
+| **System Architecture** | Single Desktop / Workstation GPU (`x86_64`) | Single Grace Blackwell Superchip (`ARM64 aarch64`) | Cloud / Datacenter GPU (`x86_64`) |
+| **Memory Pool & Bandwidth** | **`16 GB GDDR7`** (`~672 GB/s`) | **`128 GB Unified LPDDR5x`** (`~273 GB/s`) | `24 GB GDDR6` (`~600 GB/s`) |
+| **48-Frame Peak Memory Used (`da3` / `pi3` / `vggt`)** | **`6.34 GiB` / `6.87 GiB` / `5.26 GiB`** (`33%–43%` of 16 GB) | **`6.34 GiB` / `6.87 GiB` / `5.26 GiB`** (`4%–5%` of 128 GB) | `10.13 GiB` / `8.52 GiB` / `6.94 GiB` (`FP32` master weights) |
+| **Studio Web UI (`2–48` Frames, All 3 Models)** | **100% Supported Standalone** (even in shared mode with `~12–13 GiB` free VRAM) | **100% Supported Standalone** | Supported |
+| **Max Consecutive Frame Ceiling (CLI)** | **`48–64` frames (Shared)** · **`64–96+` frames (Dedicated 16 GB)** | **`96–250+` frames** (Single-pass ultra-long sequences) | `~64–80` frames |
+| **Best Fit Use Case** | Fast interactive desktop/workstation 3D reconstruction (`2–96` frames) on consumer 16 GB Blackwell hardware | Always-on 24/7 Studio appliance, ultra-long `96–250+` frame CLI sequences, or co-hosting multiple large AI models simultaneously | Standard cloud Space deployment |
+
+See the full architectural deep dive and standalone setup instructions for both platforms in [**`docs/BLACKWELL_OPTIMIZATIONS.md`**](docs/BLACKWELL_OPTIMIZATIONS.md).
 
 ---
 
