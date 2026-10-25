@@ -1,6 +1,7 @@
 """RGB semantic sky masks shared across backbones; no depth threshold."""
 
 from pathlib import Path
+import os
 import numpy as np
 from PIL import Image
 import torch
@@ -21,6 +22,7 @@ class SkySegmenter:
         from .hub import sha256
 
         names = ["config.json", "preprocessor_config.json", "pytorch_model.bin"]
+        local_directory = local_directory or os.environ.get("PURE_SKY_MODEL_DIR")
         if local_directory:
             files = {name: Path(local_directory) / name for name in names}
         else:

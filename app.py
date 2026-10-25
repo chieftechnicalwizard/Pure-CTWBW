@@ -9,6 +9,7 @@ import threading
 import time
 
 os.environ.setdefault("GRADIO_ANALYTICS_ENABLED", "False")
+os.environ.setdefault("PYTORCH_CUDA_ALLOC_CONF", "expandable_segments:True")
 
 import gradio as gr
 import torch

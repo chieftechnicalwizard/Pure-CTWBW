@@ -2,7 +2,10 @@
 
 from pathlib import Path
 import argparse
+import os
 import sys
+
+os.environ.setdefault("PYTORCH_CUDA_ALLOC_CONF", "expandable_segments:True")
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 from pure import PURE, PUREImageProcessor
@@ -14,8 +17,12 @@ def main():
     source = p.add_mutually_exclusive_group(required=True)
     source.add_argument("--video")
     source.add_argument("--images", nargs="+", help="Images in temporal order")
-    weights = p.add_mutually_exclusive_group(required=True)
-    weights.add_argument("--pretrained", help="HF model ID or local directory")
+    weights = p.add_mutually_exclusive_group(required=False)
+    weights.add_argument(
+        "--pretrained",
+        default=os.environ.get("PURE_MODEL_ROOT"),
+        help="HF model ID or local directory (defaults to $PURE_MODEL_ROOT)",
+    )
     weights.add_argument(
         "--legacy-model",
         choices=["pi3", "da3", "vggt"],
@@ -30,8 +37,14 @@ def main():
     p.add_argument("--precision", choices=["auto", "fp32", "bf16"], default="auto")
     p.add_argument("--keep-sky", action="store_true")
     p.add_argument("--save-raw", action="store_true")
-    p.add_argument("--sky-model-directory")
+    p.add_argument(
+        "--sky-model-directory",
+        default=os.environ.get("PURE_SKY_MODEL_DIR"),
+        help="Local sky segmenter directory (defaults to $PURE_SKY_MODEL_DIR)",
+    )
     args = p.parse_args()
+    if not args.pretrained and not args.legacy_model:
+        p.error("one of the arguments --pretrained --legacy-model (or $PURE_MODEL_ROOT) is required")
     if args.output.exists() and any(args.output.iterdir()):
         p.error("Choose an empty output directory")
     if args.pretrained:

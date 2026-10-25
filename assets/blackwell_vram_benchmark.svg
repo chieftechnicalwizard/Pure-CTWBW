@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1100" height="620" viewBox="0 0 1100 620">
+  <title>Untitled-2</title>
+  <g id="Layer_1" data-name="Layer 1">
+    <path d="M0 0 L1100 0 L1100 620 L0 620 Z" fill="#0b0f19"/>
+    <path d="M34 20 L1066 20 C1071.523 20 1076 24.477 1076 30 L1076 84 C1076 89.523 1071.523 94 1066 94 L34 94 C28.477 94 24 89.523 24 84 L24 30 C24 24.477 28.477 20 34 20 Z" fill="#111827" stroke="#1f2937" stroke-width="1.5" stroke-miterlimit="10"/>
+    <path d="M34 110 L654 110 C659.523 110 664 114.477 664 120 L664 586 C664 591.523 659.523 596 654 596 L34 596 C28.477 596 24 591.523 24 586 L24 120 C24 114.477 28.477 110 34 110 Z" fill="#111827" stroke="#1f2937" stroke-width="1.5" stroke-miterlimit="10"/>
+    <path d="M690 110 L1066 110 C1071.523 110 1076 114.477 1076 120 L1076 334 C1076 339.523 1071.523 344 1066 344 L690 344 C684.477 344 680 339.523 680 334 L680 120 C680 114.477 684.477 110 690 110 Z" fill="#111827" stroke="#1f2937" stroke-width="1.5" stroke-miterlimit="10"/>
+    <path d="M690 360 L1066 360 C1071.523 360 1076 364.477 1076 370 L1076 586 C1076 591.523 1071.523 596 1066 596 L690 596 C684.477 596 680 591.523 680 586 L680 370 C680 364.477 684.477 360 690 360 Z" fill="#111827" stroke="#1f2937" stroke-width="1.5" stroke-miterlimit="10"/>
+    <path d="M88 184 L644 184" fill="none" stroke="#ef4444" stroke-width="1.5" stroke-miterlimit="10"/>
+    <path d="M88 296 L644 296" fill="none" stroke="#f59e0b" stroke-width="1.5" stroke-miterlimit="10"/>
+    <path d="M88 337 L644 337" fill="none" stroke="#10b981" stroke-width="1.5" stroke-miterlimit="10"/>
+    <path d="M88 408 L644 408" fill="none" stroke="#1f2937" stroke-miterlimit="10"/>
+    <path d="M88 520 L644 520" fill="none" stroke="#4b5563" stroke-width="1.5" stroke-miterlimit="10"/>
+    <path d="M139 401 L183 401 C185.209 401 187 402.791 187 405 L187 516 C187 518.209 185.209 520 183 520 L139 520 C136.791 520 135 518.209 135 516 L135 405 C135 402.791 136.791 401 139 401 Z" fill="#475569" stroke="#64748b" stroke-miterlimit="10"/>
+    <path d="M199 424 L243 424 C245.209 424 247 425.791 247 428 L247 516 C247 518.209 245.209 520 243 520 L199 520 C196.791 520 195 518.209 195 516 L195 428 C195 425.791 196.791 424 199 424 Z" fill="#06b6d4" stroke="#22d3ee" stroke-width="1.5" stroke-miterlimit="10"/>
+    <path d="M319 378 L363 378 C365.209 378 367 379.791 367 382 L367 516 C367 518.209 365.209 520 363 520 L319 520 C316.791 520 315 518.209 315 516 L315 382 C315 379.791 316.791 378 319 378 Z" fill="#475569" stroke="#64748b" stroke-miterlimit="10"/>
+    <path d="M379 431 L423 431 C425.209 431 427 432.791 427 435 L427 516 C427 518.209 425.209 520 423 520 L379 520 C376.791 520 375 518.209 375 516 L375 435 C375 432.791 376.791 431 379 431 Z" fill="#10b981" stroke="#34d399" stroke-width="1.5" stroke-miterlimit="10"/>
+    <path d="M499 423 L543 423 C545.209 423 547 424.791 547 427 L547 516 C547 518.209 545.209 520 543 520 L499 520 C496.791 520 495 518.209 495 516 L495 427 C495 424.791 496.791 423 499 423 Z" fill="#475569" stroke="#64748b" stroke-miterlimit="10"/>
+    <path d="M559 446 L603 446 C605.209 446 607 447.791 607 450 L607 516 C607 518.209 605.209 520 603 520 L559 520 C556.791 520 555 518.209 555 516 L555 450 C555 447.791 556.791 446 559 446 Z" fill="#8b5cf6" stroke="#a78bfa" stroke-width="1.5" stroke-miterlimit="10"/>
+    <path d="M783 170 L949 170 C950.657 170 952 171.343 952 173 L952 181 C952 182.657 950.657 184 949 184 L783 184 C781.343 184 780 182.657 780 181 L780 173 C780 171.343 781.343 170 783 170 Z" fill="#475569"/>
+    <path d="M783 188 L867 188 C868.657 188 870 189.343 870 191 L870 199 C870 200.657 868.657 202 867 202 L783 202 C781.343 202 780 200.657 780 199 L780 191 C780 189.343 781.343 188 783 188 Z" fill="#06b6d4"/>
+    <path d="M783 222 L1006 222 C1007.657 222 1009 223.343 1009 225 L1009 233 C1009 234.657 1007.657 236 1006 236 L783 236 C781.343 236 780 234.657 780 233 L780 225 C780 223.343 781.343 222 783 222 Z" fill="#475569"/>
+    <path d="M783 240 L898 240 C899.657 240 901 241.343 901 243 L901 251 C901 252.657 899.657 254 898 254 L783 254 C781.343 254 780 252.657 780 251 L780 243 C780 241.343 781.343 240 783 240 Z" fill="#10b981"/>
+    <path d="M783 274 L995 274 C996.657 274 998 275.343 998 277 L998 285 C998 286.657 996.657 288 995 288 L783 288 C781.343 288 780 286.657 780 285 L780 277 C780 275.343 781.343 274 783 274 Z" fill="#475569"/>
+    <path d="M783 292 L910 292 C911.657 292 913 293.343 913 295 L913 303 C913 304.657 911.657 306 910 306 L783 306 C781.343 306 780 304.657 780 303 L780 295 C780 293.343 781.343 292 783 292 Z" fill="#8b5cf6"/>
+    <path d="M784 424 L981 424 C983.209 424 985 425.791 985 428 L985 438 C985 440.209 983.209 442 981 442 L784 442 C781.791 442 780 440.209 780 438 L780 428 C780 425.791 781.791 424 784 424 Z" fill="#06b6d4"/>
+    <path d="M784 474 L925 474 C927.209 474 929 475.791 929 478 L929 488 C929 490.209 927.209 492 925 492 L784 492 C781.791 492 780 490.209 780 488 L780 478 C780 475.791 781.791 474 784 474 Z" fill="#10b981"/>
+    <path d="M784 524 L912 524 C914.209 524 916 525.791 916 528 L916 538 C916 540.209 914.209 542 912 542 L784 542 C781.791 542 780 540.209 780 538 L780 528 C780 525.791 781.791 524 784 524 Z" fill="#8b5cf6"/>
+    <text transform="matrix(1 0 0 1 44 50)" x="0" y="0" xml:space="preserve" font-family="&apos;Source Sans 3&apos;" font-size="20" fill="#f9fafb"><tspan x="0" y="0">PURE-CTWBW — NVIDIA Blackwell 48-Frame VRAM &amp; Latency Benchmark</tspan></text>
+    <text transform="matrix(1 0 0 1 44 74)" x="0" y="0" xml:space="preserve" font-family="&apos;Source Sans 3&apos;" font-size="11" fill="#9ca3af"><tspan x="0" y="0">DGX Spark GB10 (128 GB Unified) &amp; GeForce RTX 5070 Ti (16 GB GDDR7) · Split-Precision BF16/FP32 + FlashAttention-2 SDPA (7.31M 3D Points)</tspan></text>
+    <text transform="matrix(1 0 0 1 44 138)" x="0" y="0" xml:space="preserve" font-family="&apos;Source Sans 3&apos;" font-size="14" fill="#f3f4f6"><tspan x="0" y="0">48-Frame Peak GPU Memory Allocated (GiB) — Upstream vs. Pure-CTWBW</tspan></text>
+    <text transform="matrix(1 0 0 1 94 178)" x="0" y="0" xml:space="preserve" font-family="&apos;Source Sans 3&apos;" font-size="10" fill="#ef4444"><tspan x="0" y="0">24.0 GiB — Upstream Author Recommended GPU (A10G 24 GB)</tspan></text>
+    <text transform="matrix(1 0 0 1 94 290)" x="0" y="0" xml:space="preserve" font-family="&apos;Source Sans 3&apos;" font-size="10" fill="#f59e0b"><tspan x="0" y="0">16.0 GiB — GeForce RTX 5070 Ti Dedicated VRAM Ceiling</tspan></text>
+    <text transform="matrix(1 0 0 1 94 331)" x="0" y="0" xml:space="preserve" font-family="&apos;Source Sans 3&apos;" font-size="10" fill="#10b981"><tspan x="0" y="0">13.1 GiB — GeForce RTX 5070 Ti Shared Headroom (with TTS + ASR active)</tspan></text>
+    <text transform="matrix(1 0 0 1 44 411)" x="0" y="0" xml:space="preserve" font-family="&apos;Source Sans 3&apos;" font-size="10" fill="#9ca3af"><tspan x="0" y="0">8.0 GiB</tspan></text>
+    <text transform="matrix(1 0 0 1 48 523)" x="0" y="0" xml:space="preserve" font-family="&apos;Source Sans 3&apos;" font-size="10" fill="#9ca3af"><tspan x="0" y="0">0 GiB</tspan></text>
+    <text transform="matrix(1 0 0 1 140 394)" x="0" y="0" xml:space="preserve" font-family="&apos;Source Sans 3&apos;" font-size="10" fill="#cbd5e1"><tspan x="0" y="0">8.52 GiB</tspan></text>
+    <text transform="matrix(1 0 0 1 194 417)" x="0" y="0" xml:space="preserve" font-family="&apos;Source Sans 3&apos;" font-size="10" fill="#22d3ee"><tspan x="0" y="0">6.87 (-19%)</tspan></text>
+    <text transform="matrix(1 0 0 1 318 371)" x="0" y="0" xml:space="preserve" font-family="&apos;Source Sans 3&apos;" font-size="10" fill="#cbd5e1"><tspan x="0" y="0">10.13 GiB</tspan></text>
+    <text transform="matrix(1 0 0 1 374 424)" x="0" y="0" xml:space="preserve" font-family="&apos;Source Sans 3&apos;" font-size="10" fill="#34d399"><tspan x="0" y="0">6.34 (-37%)</tspan></text>
+    <text transform="matrix(1 0 0 1 500 416)" x="0" y="0" xml:space="preserve" font-family="&apos;Source Sans 3&apos;" font-size="10" fill="#cbd5e1"><tspan x="0" y="0">6.94 GiB</tspan></text>
+    <text transform="matrix(1 0 0 1 554 439)" x="0" y="0" xml:space="preserve" font-family="&apos;Source Sans 3&apos;" font-size="10" fill="#c4b5fd"><tspan x="0" y="0">5.26 (-24%)</tspan></text>
+    <text transform="matrix(1 0 0 1 162 544)" x="0" y="0" xml:space="preserve" font-family="&apos;Source Sans 3&apos;" font-size="12" fill="#f3f4f6"><tspan x="0" y="0">pi3 (989M)</tspan></text>
+    <text transform="matrix(1 0 0 1 324 544)" x="0" y="0" xml:space="preserve" font-family="&apos;Source Sans 3&apos;" font-size="12" fill="#f3f4f6"><tspan x="0" y="0">da3-Giant (1.21B)</tspan></text>
+    <text transform="matrix(1 0 0 1 510 544)" x="0" y="0" xml:space="preserve" font-family="&apos;Source Sans 3&apos;" font-size="12" fill="#f3f4f6"><tspan x="0" y="0">vggt-1B (1.16B)</tspan></text>
+    <text transform="matrix(1 0 0 1 48 576)" x="0" y="0" xml:space="preserve" font-family="&apos;Source Sans 3&apos;" font-size="11" fill="#9ca3af"><tspan x="0" y="0">Gray = Upstream PURE (FP32 Master Weights + BF16 Autocast)   |   Colored = Pure-CTWBW (Split BF16/FP32 + Cache Reclaim)</tspan></text>
+    <text transform="matrix(1 0 0 1 700 138)" x="0" y="0" xml:space="preserve" font-family="&apos;Source Sans 3&apos;" font-size="14" fill="#f3f4f6"><tspan x="0" y="0">Static Weight VRAM (FP32 vs. CTWBW Split)</tspan></text>
+    <text transform="matrix(1 0 0 1 700 186)" x="0" y="0" xml:space="preserve" font-family="&apos;Source Sans 3&apos;" font-size="11" fill="#e5e7eb"><tspan x="0" y="0">pi3</tspan></text>
+    <text transform="matrix(1 0 0 1 878 198)" x="0" y="0" xml:space="preserve" font-family="&apos;Source Sans 3&apos;" font-size="10" fill="#22d3ee"><tspan x="0" y="0">3.45 -&gt; 1.79 GiB (-48%)</tspan></text>
+    <text transform="matrix(1 0 0 1 700 238)" x="0" y="0" xml:space="preserve" font-family="&apos;Source Sans 3&apos;" font-size="11" fill="#e5e7eb"><tspan x="0" y="0">da3</tspan></text>
+    <text transform="matrix(1 0 0 1 908 250)" x="0" y="0" xml:space="preserve" font-family="&apos;Source Sans 3&apos;" font-size="10" fill="#34d399"><tspan x="0" y="0">4.58 -&gt; 2.42 GiB (-47%)</tspan></text>
+    <text transform="matrix(1 0 0 1 700 290)" x="0" y="0" xml:space="preserve" font-family="&apos;Source Sans 3&apos;" font-size="11" fill="#e5e7eb"><tspan x="0" y="0">vggt</tspan></text>
+    <text transform="matrix(1 0 0 1 920 302)" x="0" y="0" xml:space="preserve" font-family="&apos;Source Sans 3&apos;" font-size="10" fill="#c4b5fd"><tspan x="0" y="0">4.35 -&gt; 2.65 GiB (-39%)</tspan></text>
+    <text transform="matrix(1 0 0 1 700 388)" x="0" y="0" xml:space="preserve" font-family="&apos;Source Sans 3&apos;" font-size="14" fill="#f3f4f6"><tspan x="0" y="0">48-Frame Feed-Forward Latency (GB10)</tspan></text>
+    <text transform="matrix(1 0 0 1 700 438)" x="0" y="0" xml:space="preserve" font-family="&apos;Source Sans 3&apos;" font-size="11" fill="#e5e7eb"><tspan x="0" y="0">pi3 (48f)</tspan></text>
+    <text transform="matrix(1 0 0 1 992 438)" x="0" y="0" xml:space="preserve" font-family="&apos;Source Sans 3&apos;" font-size="11" fill="#22d3ee"><tspan x="0" y="0">8.21 s (-6.8%)</tspan></text>
+    <text transform="matrix(1 0 0 1 700 488)" x="0" y="0" xml:space="preserve" font-family="&apos;Source Sans 3&apos;" font-size="11" fill="#e5e7eb"><tspan x="0" y="0">da3 (48f)</tspan></text>
+    <text transform="matrix(1 0 0 1 938 488)" x="0" y="0" xml:space="preserve" font-family="&apos;Source Sans 3&apos;" font-size="11" fill="#34d399"><tspan x="0" y="0">5.94 s (-8.3%)</tspan></text>
+    <text transform="matrix(1 0 0 1 700 538)" x="0" y="0" xml:space="preserve" font-family="&apos;Source Sans 3&apos;" font-size="11" fill="#e5e7eb"><tspan x="0" y="0">vggt (48f)</tspan></text>
+    <text transform="matrix(1 0 0 1 925 538)" x="0" y="0" xml:space="preserve" font-family="&apos;Source Sans 3&apos;" font-size="11" fill="#c4b5fd"><tspan x="0" y="0">5.44 s (-8.3%)</tspan></text>
+    <text transform="matrix(1 0 0 1 700 576)" x="0" y="0" xml:space="preserve" font-family="&apos;Source Sans 3&apos;" font-size="10" fill="#9ca3af"><tspan x="0" y="0">Zero teacher models loaded at inference · 7,308,956 3D points exported</tspan></text>
+  </g>
+</svg>

@@ -373,7 +373,10 @@ class Head(nn.Module):
             uv = uv.permute(2, 0, 1).unsqueeze(0).expand(x.shape[0], -1, -1, -1)
             x = torch.cat([x, uv], dim=1)
             for layer in block:
-                x = torch.utils.checkpoint.checkpoint(layer, x, use_reentrant=False)
+                if self.training:
+                    x = torch.utils.checkpoint.checkpoint(layer, x, use_reentrant=False)
+                else:
+                    x = layer(x)
 
         # (patch_h * 8, patch_w * 8) -> (img_h, img_w)
         x = F.interpolate(x, (img_h, img_w), mode="bilinear", align_corners=False)

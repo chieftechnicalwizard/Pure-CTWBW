@@ -20,6 +20,8 @@ checkpoints/
 *.key
 
 hf_models/
+offline_weights/
+venv/
 space_outputs/
 *.glb
 
